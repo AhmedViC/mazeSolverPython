@@ -1,0 +1,1 @@
+ defaultMaze[y][x] = 'X'
