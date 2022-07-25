@@ -1,10 +1,11 @@
 from Path import *
 from functions import *
 defaultMaze = [
-    ['P','P','W','P'],
-    ['P','W','W','P'],
-    ['P','W','W','P'],
-    ['E','P','P','P']
+    ['W','W','W','W','W','W','W','W','W'],
+    ['P','W','W','P','W','P','W','P','W'],
+    ['P','W','W','P','P','P','P','P','P'],
+    ['P','P','P','P','W','W','W','W','E'],
+    ['W','W','W','W','W','W','W','W','W']
     ]
 
 
@@ -16,8 +17,8 @@ defaultMaze = [
 isDefaultMaze = True
 newMaze = []
 currentPath = []
-x = 1
-y = 0
+x = 0
+y = 1
 while True:
     choice = menu()
     if(choice==1):
