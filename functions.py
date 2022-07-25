@@ -1,5 +1,8 @@
 from time import sleep
 from Path import *
+import os
+
+
 
 
 def isValid(y,x, maze):
@@ -14,12 +17,22 @@ def printMaze(maze):
     print('---------------------------------------------')
     for i in range(len(maze)):
         for j in range(len(maze[i])):
-            print(maze[i][j],end=' ')
+            if maze[i][j]=="W":
+                print('█',end=' ')
+            elif maze[i][j]=='P':
+                print(' ',end=' ')
+            elif maze[i][j]=='E':
+                print('🥞',end=' ')    
+            else:
+                print(maze[i][j],end=' ')
+
 
         print('\n') 
 
+
 def menu():
 
+    os.system('cls')
     print('Welcome To maze solver using python')
     print('1- Create a custome Maze')
     print('2- Test program with default maze')
@@ -32,12 +45,14 @@ def menu():
 
 def mazeSolve(defaultMaze,currentPath):
         while True:
+            sleep(2)
+            os.system('cls')
         
         
             
             y = currentPath[len(currentPath)-1].y
             x= currentPath[len(currentPath)-1].x
-            defaultMaze[y][x] = 'X'
+            defaultMaze[y][x] = '☺'
             printMaze(defaultMaze)
             sleep(3)
             if isValid(y+1,x,defaultMaze):
@@ -47,37 +62,45 @@ def mazeSolve(defaultMaze,currentPath):
                     printMaze(defaultMaze)
                     break
                 elif defaultMaze[y+1][x]=='P':
+                    defaultMaze[y][x]=' '
                     print('moved down..')
                     currentPath.append(Path(y+1,x))
                     continue
             if isValid(y-1,x,defaultMaze):
                 if defaultMaze[y-1][x]=='E':
+                    defaultMaze[y][x]=' '
                     defaultMaze[y-1][x]='X'
                     printMaze(defaultMaze)
                     print("moved up, You won!")
                     break
                 elif defaultMaze[y-1][x]=='P':
+                    
                     print('moved up')
+                    defaultMaze[y][x]=' '
                     currentPath.append(Path(y-1,x))
                     continue 
             if isValid(y,x-1,defaultMaze):
                 if defaultMaze[y][x-1]=='E':
                     defaultMaze[y][x-1]='X'
+                    defaultMaze[y][x]=' '
                     printMaze(defaultMaze)
                     print("moved left, You won!")
                     break
                 elif defaultMaze[y][x-1]=='P':
                     currentPath.append(Path(y,x-1))
+                    defaultMaze[y][x]=' '
                     print("moved left")
                     continue  
             if isValid(y,x+1,defaultMaze):
                 if defaultMaze[y][x+1]=='E':
                     defaultMaze[y][x+1]='X'
+                    defaultMaze[y][x]=' '
                     printMaze(defaultMaze)
                     print("moved right, You won!")
                     break
                 elif defaultMaze[y][x+1]=='P':
                     currentPath.append(Path(y,x+1))
+                    defaultMaze[y][x]=' '
                     print("moved right")
                     continue  
 
